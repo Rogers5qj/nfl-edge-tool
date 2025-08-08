@@ -2,7 +2,7 @@ name: Weekly
 
 on:
   schedule:
-    - cron: '0 10 * * 2'  # Runs every Tuesday at 10:00 UTC (6am ET)
+    - cron: '0 10 * * 2'
   workflow_dispatch:
 
 jobs:
@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Set up Python
@@ -23,10 +23,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Create creds.json from GitHub secret
+      - name: Create creds.json from secret
         run: |
           echo "${{ secrets.GOOGLE_CREDS_JSON }}" > creds.json
 
-      - name: Run nfl_edge CLI
+      - name: Run CLI
         run: |
           python -m nfl_edge.cli --config config.yml --credentials creds.json
