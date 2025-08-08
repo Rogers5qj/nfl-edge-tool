@@ -3,7 +3,7 @@ name: Weekly
 on:
   schedule:
     - cron: '0 10 * * 2'  # Every Tuesday at 10:00 UTC (6am ET)
-  workflow_dispatch:      # Allow manual runs
+  workflow_dispatch:      # Manual trigger
 
 jobs:
   run-nfl-edge:
@@ -23,4 +23,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Load Goog
+      - name: Create creds.json from secret
+        run: |
+          echo "${{ secrets.GOOGLE_CREDS_JSON }}" > creds.json
+
+      - name: Run weekly WR Edge update
+        run: |
+          python -m nfl_edge.cli --config config.yml --credentials creds.json
