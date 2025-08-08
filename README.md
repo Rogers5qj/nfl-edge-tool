@@ -1,1 +1,1 @@
-# nfl-edge-tool
+# Placeholder for README.md

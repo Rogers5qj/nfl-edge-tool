@@ -1,0 +1,1 @@
+# Placeholder for GITHUB_SHEETS_HOWTO.md
