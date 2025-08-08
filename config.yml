@@ -1,0 +1,30 @@
+season: 2025
+week: auto
+
+exports:
+  csv:
+    enabled: true
+    output_path: "./wr_edge_rankings.csv"
+  sheets:
+    enabled: true
+    google_sheet_id: "YOUR_SHEET_ID_HERE"
+    worksheet_name: "Sheet1"
+    credentials_secret_name: "GOOGLE_CREDS_JSON"
+
+sources:
+  schedule:
+    url_template: "https://github.com/nflverse/nflverse-data/releases/download/schedules/schedule_{season}.csv"
+  wr_logs:
+    current_url: "https://yourdomain.com/wr_stats_2025.csv"
+    prior_url: "https://yourdomain.com/wr_stats_2024.csv"
+  def_pass:
+    current_url: "https://yourdomain.com/def_pass_2025.csv"
+    prior_url: "https://yourdomain.com/def_pass_2024.csv"
+
+scoring:
+  wr:
+    prior_weight_by_week:
+      1: 0.8
+      2: 0.6
+      3: 0.4
+      default: 0.0
